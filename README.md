@@ -12,11 +12,19 @@ API для аренды складов на NestJS + TypeORM + PostgreSQL.
 
 ## Запуск
 
-1. Клонировать репозиторий
-2. Создать `.env` файл по образцу `.env.example`
-3. Запустить Postgres: `docker-compose up -d`
-4. Установить зависимости: `npm install`
-5. Запустить сервер: `npm run start:dev`
+
+### Через Docker (рекомендуется)
+
+git clone https://github.com/INoSleepl/warehouse-rental-backend.git
+cd warehouse-rental-backend
+cp .env.example .env
+docker-compose up --build
+
+### Локально
+
+npm install
+docker-compose up -d postgres  # только база данных
+npm run start:dev
 
 ## Документация API
 http://localhost:3000/api/docs
