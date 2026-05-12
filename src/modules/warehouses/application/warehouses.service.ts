@@ -1,12 +1,16 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { WarehousesRepository } from '../infrastructure/warehouses.repository';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateWarehouseDto } from './dto/create-warehouse.dto';
 import { UpdateWarehouseDto } from './dto/update-warehouse.dto';
 import { IWarehousesService } from '../domain/interfaces/warehouses.service.interface';
+import { WAREHOUSE_REPO_TOKEN } from '../domain/interfaces/warehouses.repository.interface';
+import type { IWarehousesRepository } from '../domain/interfaces/warehouses.repository.interface';
 
 @Injectable()
 export class WarehousesService implements IWarehousesService {
-  constructor(private readonly warehousesRepository: WarehousesRepository) {}
+  constructor(
+    @Inject(WAREHOUSE_REPO_TOKEN)
+    private readonly warehousesRepository: IWarehousesRepository,
+  ) {}
 
   async create(dto: CreateWarehouseDto) {
     return this.warehousesRepository.create(dto);

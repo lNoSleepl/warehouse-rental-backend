@@ -1,14 +1,16 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
-import { RentalsRepository } from '../infrastructure/rentals.repository';
+import { Injectable, NotFoundException, BadRequestException, Inject } from '@nestjs/common';
 import { WarehousesService } from '../../warehouses/application/warehouses.service';
 import { CreateRentalDto } from './dto/create-rental.dto';
 import { UpdateRentalStatusDto } from './dto/update-rental-status.dto';
 import { IRentalsService } from '../domain/interfaces/rental.service.interface';
+import { RENTAL_REPO_TOKEN } from '../domain/interfaces/rentals.repository.interface';
+import type { IRentalsRepository } from '../domain/interfaces/rentals.repository.interface';
 
 @Injectable()
 export class RentalsService implements IRentalsService {
   constructor(
-    private readonly rentalsRepository: RentalsRepository,
+    @Inject(RENTAL_REPO_TOKEN)
+    private readonly rentalsRepository: IRentalsRepository,
     private readonly warehousesService: WarehousesService,
   ) {}
 

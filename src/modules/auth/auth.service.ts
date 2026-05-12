@@ -19,7 +19,7 @@ export class AuthService {
     if (!isPasswordValid) throw new UnauthorizedException('Неверный email или пароль');
 
     // Создаём JWT токен
-    const payload = { sub: user.id, email: user.email, role: user.role };
+    const payload = { sub: user.id, role: user.role };
     return {
       access_token: this.jwtService.sign(payload),
       user: {

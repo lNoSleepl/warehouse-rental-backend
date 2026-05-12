@@ -7,3 +7,5 @@ export interface IUsersRepository {
   create(data: Partial<User>): Promise<User>;
   updateRole(id: string, role: string): Promise<User>;
 }
+
+export const USER_REPO_TOKEN = Symbol('IUsersRepository');

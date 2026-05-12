@@ -1,5 +1,7 @@
 import { Rental } from '../rental.entity';
 
+export const RENTAL_REPO_TOKEN = Symbol('IRentalRepository');
+
 export interface IRentalsRepository {
   create(data: Partial<Rental>): Promise<Rental>;
   findAll(): Promise<Rental[]>;

@@ -1,13 +1,17 @@
-import { Injectable, ConflictException } from '@nestjs/common';
+import { Injectable, ConflictException, Inject } from '@nestjs/common';
 import * as bcrypt from 'bcryptjs';
-import { UsersRepository } from '../infrastructure/users.repository';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from '../domain/user.entity';
 import { IUsersService } from '../domain/interfaces/users.service.interface';
+import type { IUsersRepository } from '../domain/interfaces/users.repository.interface';
+import { USER_REPO_TOKEN } from '../domain/interfaces/users.repository.interface';
 
 @Injectable()
 export class UsersService implements IUsersService {
-  constructor(private readonly usersRepository: UsersRepository) {}
+  constructor(
+    @Inject(USER_REPO_TOKEN)
+    private readonly usersRepository: IUsersRepository,
+  ) {}
 
   async register(dto: CreateUserDto): Promise<Omit<User, 'password'>> {
     // Проверяем что email не занят

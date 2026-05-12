@@ -1,5 +1,7 @@
 import { Warehouse } from '../warehouse.entity';
 
+export const WAREHOUSE_REPO_TOKEN = Symbol('IWarehousesRepository');
+
 export interface IWarehousesRepository {
   findAll(): Promise<Warehouse[]>;
   findAvailable(): Promise<Warehouse[]>;
